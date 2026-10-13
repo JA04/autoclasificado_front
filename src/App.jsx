@@ -21,12 +21,14 @@ export default function App() {
 
   // La búsqueda se dispara cuando el usuario deja de escribir
   useEffect(() => {
+    const next = query.trim()
+    if (next === search) return
     const timer = setTimeout(() => {
-      setSearch(query.trim())
+      setSearch(next)
       setPage(0)
     }, SEARCH_DELAY_MS)
     return () => clearTimeout(timer)
-  }, [query])
+  }, [query, search])
 
   useEffect(() => {
     const controller = new AbortController()

@@ -108,6 +108,22 @@ describe('App', () => {
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0 })
   })
 
+  it('se queda en la página elegida aunque se pagine apenas carga', async () => {
+    fetchCars.mockImplementation(async ({ offset }) => ({
+      cars: offset === 0 ? makeCars(24) : makeCars(6, 25),
+      total: 30,
+    }))
+    render(<App />)
+    await userEvent.click(await screen.findByRole('button', { name: /Siguiente/ }))
+    await screen.findByText('Página 2 de 2')
+
+    // más que la espera del buscador
+    await new Promise((resolve) => setTimeout(resolve, 400))
+
+    expect(screen.getByText('Página 2 de 2')).toBeInTheDocument()
+    expect(lastRequest()).toMatchObject({ offset: 24 })
+  })
+
   it('vuelve a la primera página al cambiar un filtro', async () => {
     fetchCars.mockImplementation(async ({ offset }) => ({
       cars: offset === 0 ? makeCars(24) : makeCars(6, 25),
