@@ -5,7 +5,7 @@ publicaciones de motordil y v6 que junta el
 [backend](https://github.com/JA04/autoclasificado_back), con estética retro
 monocromática (e-ink / Mac de los 90).
 
-Stack: React 19, Vite, Tailwind CSS 4. Sin más dependencias.
+Stack: React 19, Vite, Tailwind CSS 4. Tests con Vitest y Testing Library.
 
 ## Inicio rápido
 
@@ -17,11 +17,13 @@ npm install
 npm run dev      # http://localhost:5173
 ```
 
-| Comando           | Qué hace                                    |
-| ----------------- | ------------------------------------------- |
-| `npm run dev`     | Servidor de desarrollo con recarga en vivo  |
-| `npm run build`   | Genera la versión de producción en `dist/`  |
-| `npm run preview` | Sirve `dist/` para probar el build          |
+| Comando              | Qué hace                                    |
+| -------------------- | ------------------------------------------- |
+| `npm run dev`        | Servidor de desarrollo con recarga en vivo  |
+| `npm run build`      | Genera la versión de producción en `dist/`  |
+| `npm run preview`    | Sirve `dist/` para probar el build          |
+| `npm test`           | Corre los tests una vez                     |
+| `npm run test:watch` | Corre los tests y los repite al guardar     |
 
 ## Qué hace
 
@@ -54,6 +56,14 @@ El proxy solo existe en `npm run dev`. Para un build de producción hay que defi
 El front usa `GET /cars` con los parámetros `province`, `q`, `limit` y `offset`, y lee
 el total de resultados del header `X-Total-Count`.
 
+## Tests
+
+Vitest con Testing Library sobre jsdom. No necesitan el backend ni la red: los de
+`App` reemplazan `services/api.js` y los de `api.js` reemplazan `fetch`.
+
+Cada archivo de test está al lado del código que prueba (`CarCard.test.jsx` junto a
+`CarCard.jsx`). `src/test/` tiene la configuración y los datos de ejemplo.
+
 ## Estructura
 
 ```text
@@ -68,6 +78,7 @@ src/
 ├── services/
 │   └── api.js              # llamada a GET /cars
 ├── App.jsx                 # estado: filtros, página, carga y errores
+├── test/                   # configuración de los tests y datos de ejemplo
 ├── index.css               # Tailwind y tema (colores, tipografías)
 └── main.jsx
 ```
