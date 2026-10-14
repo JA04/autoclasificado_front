@@ -8,7 +8,7 @@ export default function Header() {
         <span aria-hidden="true" className="titlebar-stripes h-4 flex-1" />
       </div>
       <p className="border-t border-ink px-3 py-1 font-mono text-xs text-neutral-600">
-        Autos usados de motordil y v6, en un solo lugar.
+        Autos usados de motordil, v6 y MercadoLibre, en un solo lugar.
       </p>
     </header>
   )

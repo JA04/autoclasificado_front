@@ -1,7 +1,7 @@
 # Autoclasificado — frontend
 
 Interfaz web de un agregador de autos usados. Muestra en un solo lugar las
-publicaciones de motordil y v6 que junta el
+publicaciones de motordil, v6 y MercadoLibre que junta el
 [backend](https://github.com/JA04/autoclasificado_back), con estética retro
 monocromática (e-ink / Mac de los 90).
 
